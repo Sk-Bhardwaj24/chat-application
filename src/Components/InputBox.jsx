@@ -23,7 +23,13 @@ const Div = styled.div`
     box-shadow: none;
     color: white;
   }
-  .scroll::-webkit-scrollbar {
+  .gif-box {
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px,
+      rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
+      rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+  }
+
+  .gif-box::-webkit-scrollbar {
     display: none;
   }
   .button:focus {
@@ -45,6 +51,7 @@ const Input = styled.input`
   box-shadow: none;
   color: white;
   padding: 5px;
+  box-sizing: border-box;
 `;
 const Button = styled.button`
   box-sizing: border-box;
@@ -53,7 +60,7 @@ const Button = styled.button`
   border-radius: 40px;
   background-color: rgb(33, 48, 169);
   color: white;
-  /* border-color: rgb(33, 48, 169); */
+  cursor: pointer;
 `;
 const InputBox = () => {
   const [textdata, setTextdata] = React.useState("");
@@ -129,11 +136,12 @@ const InputBox = () => {
             height: "400px",
             maxHeight: "400px",
             maxWidth: "300px",
-
+            borderRadius: "10px",
             backgroundColor: "rgb(36, 37, 38)",
             overflowY: "scroll",
-            boxShadow: " 0 20px 40px rgba(0, 0, 0, 0.9)",
+            // boxShadow: " 0 20px 40px rgba(0, 0, 0, 0.9)",
           }}
+          className="gif-box"
         >
           <div className="gif-input-box">
             <Input onChange={handlegifchange} value={gifsearch} />
@@ -144,11 +152,11 @@ const InputBox = () => {
           {gif.map((each, idx) => (
             <div key={idx}>
               <img
-                src={each.images.downsized_still.url}
+                src={each.images.preview_gif.url}
                 width="250px"
                 height="250px"
                 alt="GIF"
-                onClick={() => addGif(each.images.downsized_still.url)}
+                onClick={() => addGif(each.images.preview_gif.url)}
               />
             </div>
           ))}
