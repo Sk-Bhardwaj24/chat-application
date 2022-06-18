@@ -11,9 +11,11 @@ const Input = () => {
   const handleAdd = () => {
     console.log(textdata);
   };
+  const handlegif = () => {};
   return (
     <Div>
-      <input type="text" value={textdata} onChange={handleChange} />
+      <button onClick={handlegif}>GIF</button>
+      <input type="text" onChange={handleChange} value={textdata} />
       <button onClick={handleAdd}>Send</button>
     </Div>
   );
