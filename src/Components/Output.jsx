@@ -1,10 +1,24 @@
 import React from "react";
 
-const Output = ({ text, gifoutput }) => {
+const Output = ({ output }) => {
   // console.log(text, gifoutput);
   return (
     <div>
-      {text !== undefined
+      {output.map((each, idx) => (
+        <div key={idx}>
+          {each.text !== undefined ? <p>{each.text}</p> : null}
+          {each.gifmessage !== "" ? (
+            <img
+              src={each.gifmessage}
+              alt="Gif.."
+              width="250px"
+              height="250px"
+            />
+          ) : null}
+        </div>
+      ))}
+
+      {/* {text !== undefined
         ? text.map((eachtext, idx) => <p key={idx}>{eachtext}</p>)
         : null}
       {gifoutput !== undefined
@@ -13,7 +27,7 @@ const Output = ({ text, gifoutput }) => {
               <img src={each} alt="Gif.." width="250px" height="250px" />
             </div>
           ))
-        : null}
+        : null} */}
     </div>
   );
 };

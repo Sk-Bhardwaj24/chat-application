@@ -36,8 +36,11 @@ const Input = () => {
       .then((res) => setGif(res.data));
   };
   const addGif = (url) => {
-    setGifoutput([...gifoutput, url]);
-    console.log(url);
+    const payload = {
+      text: "",
+      gifmessage: url,
+    };
+    setOutput([...output, payload]);
   };
   const handlegifmessage = () => {
     getgif();
@@ -77,7 +80,7 @@ const Input = () => {
           ))}
         </div>
       ) : null}
-      <Output text={output} gifoutput={gifoutput} />
+      <Output output={output} />
     </Div>
   );
 };
