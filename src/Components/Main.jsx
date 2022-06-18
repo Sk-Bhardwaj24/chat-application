@@ -1,10 +1,10 @@
 import React from "react";
-import Input from "./Input";
+import InputBox from "./InputBox";
 
 const Main = () => {
   return (
     <div>
-      <Input />
+      <InputBox />
     </div>
   );
 };

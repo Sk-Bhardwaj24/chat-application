@@ -3,14 +3,65 @@ import Output from "./Output";
 import styled from "styled-components";
 const Div = styled.div`
   color: white;
+  margin: 40vw;
+  margin-top: 80px;
+  .input-box {
+    display: flex;
+    margin: auto;
+  }
+  textarea {
+    width: 300px;
+    height: 40px;
+    border-radius: 40px;
+    box-sizing: border-box;
+    padding-left: 25px;
+    padding-right: 25px;
+    outline: none;
+    background-color: rgb(36, 37, 38);
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    color: white;
+  }
+  .scroll::-webkit-scrollbar {
+    display: none;
+  }
+  .button:focus {
+    outline: none;
+  }
+
+  .gif-input-box {
+    margin-top: 20px;
+  }
 `;
-const Input = () => {
+const Input = styled.input`
+  height: 40px;
+  width: 150px;
+  border-radius: 40px;
+  outline: none;
+  background-color: rgb(36, 37, 38);
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  color: white;
+  padding: 5px;
+`;
+const Button = styled.button`
+  box-sizing: border-box;
+  width: 80px;
+  height: 46px;
+  border-radius: 40px;
+  background-color: rgb(33, 48, 169);
+  color: white;
+  /* border-color: rgb(33, 48, 169); */
+`;
+const InputBox = () => {
   const [textdata, setTextdata] = React.useState("");
   const [output, setOutput] = React.useState([]);
   const [display, setDisplay] = React.useState(false);
   const [gifsearch, setGifsearch] = React.useState("");
   const [gif, setGif] = React.useState([]);
-  const [gifoutput, setGifoutput] = React.useState([]);
+
   const handleChange = (e) => {
     setTextdata(e.target.value);
   };
@@ -41,6 +92,7 @@ const Input = () => {
       gifmessage: url,
     };
     setOutput([...output, payload]);
+    setDisplay(false);
   };
   const handlegifmessage = () => {
     getgif();
@@ -48,24 +100,46 @@ const Input = () => {
 
   return (
     <Div>
-      <button onClick={handlegif}>GIF</button>
+      <div className="input-box">
+        <div>
+          {" "}
+          <Button onClick={handlegif}>GIF</Button>
+        </div>
+        <div>
+          {" "}
+          <textarea
+            className="scroll"
+            type="text"
+            onChange={handleChange}
+            value={textdata}
+          ></textarea>
+        </div>
 
-      <input type="text" onChange={handleChange} value={textdata} />
-      <button onClick={handleAdd}>Send</button>
+        <div>
+          {" "}
+          <Button onClick={handleAdd}>Send</Button>
+        </div>
+      </div>
+
       {display ? (
         <div
           style={{
             margin: "auto",
-            border: "1px solid red",
+
             height: "400px",
             maxHeight: "400px",
             maxWidth: "300px",
-            backgroundColor: "white",
+
+            backgroundColor: "rgb(36, 37, 38)",
             overflowY: "scroll",
+            boxShadow: " 0 20px 40px rgba(0, 0, 0, 0.9)",
           }}
         >
-          <input onChange={handlegifchange} value={gifsearch} />
-          <button onClick={handlegifmessage}>Search</button>
+          <div className="gif-input-box">
+            <Input onChange={handlegifchange} value={gifsearch} />
+            <Button onClick={handlegifmessage}>Search</Button>
+          </div>
+
           {/* {console.log(gif[0].images.downsized_still.url)} */}
           {gif.map((each, idx) => (
             <div key={idx}>
@@ -85,4 +159,4 @@ const Input = () => {
   );
 };
 
-export default Input;
+export default InputBox;
